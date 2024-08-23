@@ -1,18 +1,21 @@
 {
     "compilerOptions": {
       "lib": ["ES2019"],
-      "module": "commonjs",
+      // "module": "commonjs",
       "moduleResolution": "node",
-      "target": "ES2019",
+      // "target": "ES2019",
       "sourceMap": true,
       "outDir": "./dist",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "resolveJsonModule": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "target": "ES6",
+      "module": "commonjs",
     },
-    "exclude": ["node_modules"]
-
+    "exclude": ["node_modules"],
+    "include": ["src/server.ts"] // Ajuste conforme necessário
+   
 
     
   }

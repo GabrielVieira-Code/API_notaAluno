@@ -5,10 +5,9 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  
   @Column({ type: 'int' })
   age: number; // Idade do aluno
 
@@ -18,7 +17,7 @@ export class User {
   @Column({ type: 'float' })
   secondSemesterGrade: number; // Nota do segundo semestre
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   professorName: string; // Nome do professor
 
   @Column({ type: 'int' })

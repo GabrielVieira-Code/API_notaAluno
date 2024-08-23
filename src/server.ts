@@ -1,10 +1,11 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
-import { connectToDatabase } from './src/dataBase/databse'; // Importa a função para conectar ao banco de dados
-import { User } from './src/entities/User';
+import 'reflect-metadata';
+import { connectToDatabase } from './dataBase/databse'; // Importa a função para conectar ao banco de dados
+import { User } from './entities/User';
 import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from './swagger.json';
+import * as swaggerDocument from '../swagger.json';
 
 const app = express();
 app.use(express.json());
@@ -90,6 +91,6 @@ app.delete('/users/:id', async (req, res) => {
 // Endpoint para documentação Swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.listen(3000, () => {
+app.listen(process.env.PORT ?Number(process.env.PORT):3000, () => {
   console.log('Server listening on port 3000');
 });
