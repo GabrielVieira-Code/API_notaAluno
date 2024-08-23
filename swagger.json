@@ -1,33 +1,81 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API de usuários",
-      "version": "1.0.0"
-    },
-    "paths": {
-      "/users": {
-        "get": {
-          "summary": "Lista todos os usuários",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/User"
-                    }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de controle de notas dos alunos",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Lista todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Lista de usuários",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
                   }
                 }
               }
             }
           }
+        }
+      },
+      "post": {
+        "summary": "Cria um novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
         },
-        "post": {
-          "summary": "Cria um novo usuário",
-          "requestBody": {
+        "responses": {
+          "200": {
+            "description": "Usuário criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "summary": "Atualiza um usuário existente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
             "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado",
             "content": {
               "application/json": {
                 "schema": {
@@ -36,37 +84,79 @@
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove um usuário existente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
             }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário removido"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "User": {
-          "type": "object",
-   "properties": {
-        "id": {
-          "type": "integer"
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "age": {
+            "type": "integer",
+            "example": 25
+          },
+          "firstSemesterGrade": {
+            "type": "number",
+            "format": "float",
+            "example": 8.5
+          },
+          "secondSemesterGrade": {
+            "type": "number",
+            "format": "float",
+            "example": 9.0
+          },
+          "professorName": {
+            "type": "string",
+            "example": "Prof. Smith"
+          },
+          "classroomNumber": {
+            "type": "integer",
+            "example": 101
+          }
         },
-        "name": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        }
+        "required": [
+          "name",
+          "age",
+          "firstSemesterGrade",
+          "secondSemesterGrade",
+          "professorName",
+          "classroomNumber"
+        ]
       }
     }
   }
-  }
-  }
+}
